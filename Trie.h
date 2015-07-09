@@ -1,3 +1,7 @@
+// Prefix Tree (trie)
+// Autocomplete - Displays all words related to the given prefix
+// By David Cheung
+
 #include <map>
 #include <string>
 #include <iostream>
