@@ -117,8 +117,17 @@ string Trie::findWord(const string& word)
 			current = children[word[i]]; // Access character Node* element
 		}
 	}
+
+	if(current->isWord() == true)
+    {
       	string temp = current->peekContent();
         return temp;
+    }
+    else
+    {
+        //cout << current->isWord();
+        return "";
+    }
 }
 
 
