@@ -55,7 +55,6 @@ map<char, Node*> Node::getChildren()
 }
 
 
-
 Trie::Trie()
 {
 	root = new Node();
@@ -64,12 +63,6 @@ Trie::Trie()
 Trie::~Trie()
 {
 	delete root;
-}
-
-
-string Trie::findWord(const string& word)
-{
-
 }
 
 
@@ -106,7 +99,47 @@ void Trie::addWord(const string& word)
 	return;
 }
 
+
+string Trie::findWord(const string& word)
+{
+	Node* current = root;
+	// Traverse tree
+	for(unsigned i = 0; i < word.size(); ++i)
+	{
+        map<char, Node*> children = current->getChildren();
+		if(children.find(word[i]) == children.end()) // Character not found
+		{
+			return ""; // Empty string
+		}
+		else
+		{
+		    //cout << current->isWord() << " " << i << endl;
+			current = children[word[i]]; // Access character Node* element
+		}
+	}
+      	string temp = current->peekContent();
+        return temp;
+}
+
+
 void Trie::deleteWord(const string& word)
 {
+    	Node* current = root;
+	// Traverse tree
+	for(unsigned i = 0; i < word.size(); ++i)
+	{
+        map<char, Node*> children = current->getChildren();
+		if(children.find(word[i]) == children.end()) // Character not found
+		{
+			return; // Empty string
+		}
+		else
+		{
+		    //cout << current->isWord() << " " << i << endl;
+			current = children[word[i]]; // Access character Node* element
+		}
+	}
 
+	current->setWord(false);
+	return;
 }

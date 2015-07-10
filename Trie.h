@@ -35,8 +35,8 @@ public:
 	~Trie();
 
 	// Member functions
-	std::string findWord(const std::string& word);
 	void addWord(const std::string& word);
+    std::string findWord(const std::string& word);
 	void deleteWord(const std::string& word);
 
 private:
