@@ -152,3 +152,47 @@ void Trie::deleteWord(const string& word)
 	current->setWord(false);
 	return;
 }
+
+
+vector<string> Trie::nodesAfterPrefix(Node* current)
+{
+    vector<string> allWords;
+    // The current node is a word
+    if(current->isWord())
+    {
+        allWords.push_back(current->peekContent());
+    }
+
+    map<char, Node*> child = current->getChildren();
+
+    // Traverse all nodes after prefix
+    for(auto start = child.begin(); start != child.end(); start++)
+    {
+        vector<string> temp = nodesAfterPrefix(start->second);
+        allWords.insert(allWords.end(), temp.begin(), temp.end());
+    }
+
+    return allWords;
+}
+
+
+vector<string> Trie::autocomplete(const string& prefix)
+{
+        Node* current = root;
+        vector<string> emptyVector;
+        // Traverse tree
+        for(unsigned i = 0; i < prefix.size(); ++i)
+        {
+            map<char, Node*> children = current->getChildren();
+            // prefix not found
+            if(children.find(prefix[i]) == children.end())
+            {
+                return emptyVector;
+            }
+            else
+            {
+                current = children[prefix[i]];
+            }
+        }
+        return nodesAfterPrefix(current);
+}

@@ -5,6 +5,7 @@
 #include <map>
 #include <string>
 #include <iostream>
+#include <vector>
 
 // Trie Node
 class Node{
@@ -38,6 +39,8 @@ public:
 	void addWord(const std::string& word);
     std::string findWord(const std::string& word);
 	void deleteWord(const std::string& word);
+	std::vector<std::string> nodesAfterPrefix(Node* current);
+    std::vector<std::string> autocomplete(const std::string& prefix);
 
 private:
 	Node* root;
