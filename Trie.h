@@ -1,6 +1,8 @@
 // Prefix Tree (trie)
 // Autocomplete - Displays all words related to the given prefix
 // By David Cheung
+#ifndef TRIE_H
+#define TRIE_H
 
 #include <map>
 #include <string>
@@ -46,4 +48,5 @@ private:
 	Node* root;
 };
 
+#endif //TRIE_H
 

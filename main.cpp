@@ -2,6 +2,7 @@
 // By David Cheung
 
 #include "Trie.h"
+#include "test.h"
 #include <iostream>
 #include <fstream>
 
@@ -11,39 +12,24 @@ using namespace std;
 
 int main(int argc, char **argv)
 {
+    test();
+    // Open input file stream
+    ifstream wordList("wordlist.txt", ifstream::in);
     Trie* trie = new Trie();
 
-    trie->addWord("Testing");
-    trie->addWord("Ball");
-    trie->addWord("David");
-    trie->addWord("Dragon");
-    trie->addWord("Duck");
+    string strBuff;
 
-        // Invalid
-        cout << trie->findWord("Random") << endl;
+    // Read in file of default words
+    while(getline(wordList, strBuff))
+    {
+        trie->addWord(strBuff);
+    }
 
-        // Invalid
-        cout << trie->findWord("Davidd") << endl;
+    cout << "Enter prefix and press enter: " << endl;
+    cin >> strBuff;
 
-        // Invalid
-        cout << trie->findWord("Test") << endl;
-
-
-        // Valid
-        cout << trie->findWord("Testing") << endl;
-
-        // Valid
-        cout << trie->findWord("David") << endl;
-
-        // Valid
-        cout << trie->findWord("Ball") << endl;
-
-        trie->deleteWord("Testing");
-
-        cout << trie->findWord("Testing") << endl;
-
-        // Display all words starting with D
-        vector<string> test = trie->autocomplete("D");
+        // Display all words starting with prefix
+        vector<string> test = trie->autocomplete(strBuff);
         for(unsigned i = 0; i < test.size(); i++)
         {
             cout << test[i] << endl;
