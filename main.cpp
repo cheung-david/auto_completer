@@ -24,16 +24,58 @@ int main(int argc, char **argv)
     {
         trie->addWord(strBuff);
     }
-
-    cout << "Enter prefix and press enter: " << endl;
-    cin >> strBuff;
-
-        // Display all words starting with prefix
-        vector<string> test = trie->autocomplete(strBuff);
-        for(unsigned i = 0; i < test.size(); i++)
+        cout << "Prefix Tree - Autocompletion" << endl;
+        cout << "Enter a command (without quotations) followed by the word." << endl << endl;
+        cout << "Enter \"?\" to see all commands: ";
+        while(strBuff != "q")
         {
-            cout << test[i] << endl;
+            cin >> strBuff;
+            cout << endl;
+            if(strBuff == "?")
+            {
+                cout << "Commands: \"add\" to add a word, \"delete\" to delete a word " << endl;
+                cout << " \"nodes\" to see the number of words in the list or" << endl;
+                cout << "\"prefix\" to find all possible autocompletions for the given prefix." << endl;
+                cout << "\"q\" to quit." << endl << endl;
+            }
+            else if(strBuff == "add")
+            {
+                cin >> strBuff;
+                trie->addWord(strBuff);
+                cout << "Added.";
+            }
+            else if(strBuff == "delete")
+            {
+                cin >> strBuff;
+                trie->deleteWord(strBuff);
+                cout << "Deleted.";
+            }
+            else if(strBuff == "prefix")
+            {
+                cin >> strBuff;
+
+                // Display all words starting with prefix
+                vector<string> defaultList = trie->autocomplete(strBuff);
+                if(defaultList.size() == 0)
+                    cout << "No matching prefix" << endl;
+
+                for(unsigned i = 0; i < defaultList.size(); i++)
+                {
+                    cout << defaultList[i] << endl;
+                }
+            }
+            else if(strBuff == "nodes")
+            {
+                cout << "Number of nodes: " << trie->getNodes() << endl;
+            }
+            else
+            {
+                cout << "Invalid command entered. Try again." << endl;
+            }
+            cout << endl;
         }
+
+
 
     delete trie;
 }

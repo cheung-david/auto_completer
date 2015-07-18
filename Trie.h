@@ -43,9 +43,11 @@ public:
 	void deleteWord(const std::string& word);
 	std::vector<std::string> nodesAfterPrefix(Node* current);
     std::vector<std::string> autocomplete(const std::string& prefix);
+    unsigned getNodes();
 
 private:
 	Node* root;
+	unsigned totalNodes;
 };
 
 #endif //TRIE_H

@@ -77,6 +77,9 @@ void Trie::addWord(const string& word)
 		return;
 	}
     unsigned i;
+
+    totalNodes++;
+
 	// Traverse tree
 	for (i = 0; i < word.size(); i++)
 	{
@@ -195,4 +198,9 @@ vector<string> Trie::autocomplete(const string& prefix)
             }
         }
         return nodesAfterPrefix(current);
+}
+
+unsigned Trie::getNodes()
+{
+    return totalNodes;
 }
